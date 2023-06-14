@@ -17,10 +17,3 @@ npm install sequelize --save mysql2
 //Instalamos las variables de entorno  
 npm install dotenv  
 
-
-
-
-=======
-//instalar extension SQL Server Client (mssql)  
-//instalar extension thunder Client  
->>>>>>> e7d9f2a4e8f6c06b62d4cb6948f44de73e5bfafb
