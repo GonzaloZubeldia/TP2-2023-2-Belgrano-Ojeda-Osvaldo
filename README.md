@@ -1,10 +1,10 @@
-Proyecto de TP2 
+##Proyecto de TP2 
 
-nom init -y
-npm install express
+npm init -y  
+npm install express  
 
-// Trabajamos con mysql2 
-npm i mysql2
+// Trabajamos con mysql2  
+npm i mysql2  
 
-//instalar extension SQL Server Client (mssql)
-//instalar extension thunder Client
+//instalar extension SQL Server Client (mssql)  
+//instalar extension thunder Client  
