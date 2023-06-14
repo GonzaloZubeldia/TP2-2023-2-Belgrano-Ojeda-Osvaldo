@@ -1,16 +1,11 @@
 import "dotenv/config";
-
 import { Sequelize } from "sequelize";
-
-const database = process.env.DATABASE;
-const username = process.env.DB_USERNAME;
-const password = process.env.DB_PASSWPORD;
-const dialect = process.env.DB_DIALECT;
+import { database, username, password, host, port, dialect } from "../config/config.js";
 
 const connection = new Sequelize(database, username, password, {
-  host: "localhost",
+  host,
   dialect,
-  port: 3306,
+  port,
 });
 try {
   await connection.authenticate()
