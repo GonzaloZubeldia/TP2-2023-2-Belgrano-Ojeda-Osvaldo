@@ -1,7 +1,7 @@
 {
   "name": "tp2-2023-1-belgrano-a-ojeda-osvaldo",
   "version": "1.0.0",
-  "description": "",
+  "description": "npm init -y  \r npm install express",
   "main": "server.js",
   "type": "module",
   "scripts": {
