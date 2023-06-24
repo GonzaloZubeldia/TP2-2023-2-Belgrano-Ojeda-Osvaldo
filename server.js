@@ -15,7 +15,7 @@ app.use(routes)
 //Momentaneamente
 // import User from "./Models/User.js";
 // import Product from "./Models/Product.js";
-// import Category from "./Models/Category.js";
+// import Categoria from "./Models/Categoria.js";
 // import Gasto from "./Models/Gasto.js";
 
 await connection.sync({force:false}).then(() =>{
