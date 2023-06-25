@@ -1,6 +1,7 @@
-import User from "../Models/Gasto.js";
+import Gasto from "../Models/Gasto.js";
+import User from "../Models/User.js";
 
-class UserController {
+class GastoController {
   constructor() {}
   getAllGastos = async (req, res) => {
     try {

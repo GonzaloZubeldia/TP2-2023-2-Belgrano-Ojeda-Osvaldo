@@ -11,4 +11,4 @@ categoriaRoutes.post("/", categoriaController.createCategoria);
 categoriaRoutes.delete("/:id", categoriaController.deleteCategoria);
 categoriaRoutes.put("/:id", categoriaController.updateCategoria);
 
-export default categoriaController;
+export default categoriaRoutes;

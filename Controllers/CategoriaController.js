@@ -1,5 +1,5 @@
 import Categoria from "../Models/Categoria.js";
-import User from "../Models/Gasto.js";
+import User from "../Models/User.js";
 
 class CategoriaController {
   constructor() {}
@@ -46,7 +46,7 @@ class CategoriaController {
     }
   };
 
-  creatCategoria = async (req, res) => {
+  createCategoria = async (req, res) => {
     try {
       const { id, categoria } = req.body;
       const result = await Categoria.create({ id, categoria });
@@ -88,7 +88,7 @@ class CategoriaController {
     }
   };
 
-  updateGasto = async (req, res) => {
+  updateCategoria = async (req, res) => {
     try {
       const { id } = req.params;
       const { categoria } = req.body;

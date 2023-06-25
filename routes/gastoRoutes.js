@@ -5,10 +5,10 @@ const gastoRoutes = Router();
 
 const gastoController = new GastoController();
 
-gastoRoutes.get("/", gastoController.getAllUser);
-gastoRoutes.get("/:id", gastoController.getUserById);
-gastoRoutes.post("/", gastoController.createUser);
-gastoRoutes.delete("/:id", gastoController.deleteUser);
-gastoRoutes.put("/:id", gastoController.updateUser);
+gastoRoutes.get("/", gastoController.getAllGastos);
+gastoRoutes.get("/:id", gastoController.getGastoById);
+gastoRoutes.post("/", gastoController.creatGasto);
+gastoRoutes.delete("/:id", gastoController.deleteGasto);
+gastoRoutes.put("/:id", gastoController.updateGasto);
 
-export default gastoController;
+export default gastoRoutes;

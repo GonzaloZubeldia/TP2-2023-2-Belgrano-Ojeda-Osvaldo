@@ -1,7 +1,7 @@
 import { Router } from "express";
 import userRoutes from "./userRoutes.js";
 import gastoRoutes from "./gastoRoutes.js";
-import categoriaRoutes from "./categoriaRoutes.js"
+import categoriaRoutes from "./categoriaRoutes.js";
 
 const routes = Router()
 

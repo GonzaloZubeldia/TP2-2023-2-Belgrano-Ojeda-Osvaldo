@@ -5,12 +5,13 @@ class Categoria extends Model{}
 
 Categoria.init({
     id:{
-        type: DT.STRING,
+        type: DT.INTEGER,
         allowNull:false,
     },
     categoria:{
         type: DT.STRING,
         allowNull:false,
+        primaryKey:true,
         validate: {
             len:[1,20],
             isAlpha: true,
