@@ -5,7 +5,7 @@ class UserController {
   getAllGastos = async (req, res) => {
     try {
       const result = await User.findAll({
-        attributes: ["name", "monto", "fecha", "categoria", "userID"], //Filtro los campos que me trae la consulta
+        attributes: ["name", "monto", "fecha", "categoriaID", "userID"], //Filtro los campos que me trae la consulta
       });
       if (result.length === 0) throw new Error("No hay gastos");
       res.status(200).send({
@@ -25,7 +25,7 @@ class UserController {
     try {
       const { id } = req.params;
       const result = await User.findAll({
-        attributes: ["name", "monto", "fecha", "categoria", "userID"],
+        attributes: ["name", "monto", "fecha", "categoriaID", "userID"],
         //Filtro por Id
         where: {
           id,
@@ -48,7 +48,7 @@ class UserController {
   creatGasto = async (req, res) => {
     try {
       const { name, lastName, password, email } = req.body;
-      const result = await User.create({ name, monto, fecha, categoria, userID });
+      const result = await User.create({ name, monto, fecha, categoriaID, userID });
       if (!result) throw new Error("No se pudo crear el Usuario");
       res.status(200).send({
         success: true,
@@ -65,9 +65,9 @@ class UserController {
   deleteGasto = async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, monto, fecha, categoria, userID } = req.body;
+      const { name, monto, fecha, categoriaID, userID } = req.body;
       const result = await User.drop(
-        { name, monto, fecha, categoria, userID },
+        { name, monto, fecha, categoriaID, userID },
         {
           where: {
             id,
@@ -90,9 +90,9 @@ class UserController {
   updateGasto = async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, monto, fecha, categoria, userID } = req.body;
+      const { name, monto, fecha, categoriaID, userID } = req.body;
       const result = await User.update(
-        { name, monto, fecha, categoria, userID },
+        { name, monto, fecha, categoriaID, userID },
         {
           where: {
             id,
