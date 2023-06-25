@@ -9,6 +9,6 @@ categoriaRoutes.get("/", categoriaController.getAllCategorias);
 categoriaRoutes.get("/:id", categoriaController.getCategoriaById);
 categoriaRoutes.post("/", categoriaController.createCategoria);
 categoriaRoutes.delete("/:id", categoriaController.deleteCategoria);
-gastoRoutes.put("/:id", categoriaController.updateCategoria);
+categoriaRoutes.put("/:id", categoriaController.updateCategoria);
 
 export default categoriaController;

@@ -17,7 +17,7 @@ Gasto.init({
         allowNull:false,
     },
     categoria:{
-        type: DT.STRING,
+        type: DT.IN,
         allowNull:false,
     },
     UserID:{

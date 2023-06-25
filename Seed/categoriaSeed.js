@@ -2,17 +2,17 @@ import {Categoria} from '../Models/index.js'
 
 const categoriaSeed = async() => {
     try {
-        await Categori.bulkCreate([{
-            Description:"Transporte"
+        await Categoria.bulkCreate([{
+            categoria:"Transporte"
         },
         {
-            Description:"Expensas"
+            categoria:"Expensas"
         },
         {
-            Description:"Medico"
+            categoria:"Medico"
         },
         {
-            Description:"Mercado"
+            categoria:"Mercado"
         }])
     } catch (err) {
         console.log(err)

@@ -1,4 +1,4 @@
-import { verifyToken } from "../utils/token.js";
+import { verifyToken } from "../Utils/token.js";
 
 const validacionLogin = (req,res,next) => {
     try {
