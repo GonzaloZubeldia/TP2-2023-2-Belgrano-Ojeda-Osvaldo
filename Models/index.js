@@ -3,8 +3,18 @@ import Gasto from './Gasto.js'
 import Product from './Product.js' 
 import User from './User.js'
 
-Categoria.hasMany(Gasto);
-Gasto.belongsTo(Categoria);
+Categoria.hasMany(Gasto, {
+    foreignKey: "categoryId",
+  });
+Gasto.belongsTo(Categoria, {
+    foreignKey: "categoryId",
+  });
+User.hasMany(Gasto, {
+    foreignKey: "gastoId",
+  });
+  Gasto.belongsTo(User, {
+    foreignKey: "gastoId",
+  });
 
 //Role.hasMany(User); 
 //User.belongsTo(Role); 
