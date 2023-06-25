@@ -4,16 +4,16 @@ import Product from './Product.js'
 import User from './User.js'
 
 Categoria.hasMany(Gasto, {
-    foreignKey: "categoryId",
+    foreignKey: "categoriaID",
   });
 Gasto.belongsTo(Categoria, {
-    foreignKey: "categoryId",
+    foreignKey: "categoriaID",
   });
 User.hasMany(Gasto, {
-    foreignKey: "gastoId",
+    foreignKey: "gastoID",
   });
   Gasto.belongsTo(User, {
-    foreignKey: "gastoId",
+    foreignKey: "gastoID",
   });
 
 //Role.hasMany(User); 
