@@ -1,5 +1,6 @@
 import { DataTypes as DT, Model } from 'sequelize';
 import connection from "../connection/connection.js";
+import bcrypt, { genSalt } from "bcrypt"
 
 class User extends Model{
     async validatePassword(passwordtextoPlano) {
@@ -9,13 +10,18 @@ class User extends Model{
 }
 
 User.init({
+    id:{
+        type: DT.INTEGER,
+        allowNull:false,
+        autoIncrement:true,
+        primaryKey:true
+    },
     name:{
         type: DT.STRING,
         allowNull:false,
         validate: {
             len:[1,20],
             isAlpha: true,
-            isNull: false,
         }
     },
     lastName:{
@@ -24,7 +30,6 @@ User.init({
         validate: {
             len:[1,20],
             isAlpha: true,
-            isNull: false,
         }
     },
     password:{
@@ -32,7 +37,6 @@ User.init({
         allowNull:false,
         validate: {
             len:[1,10],
-            isNull: false,
         }
     },
     email:{
@@ -40,31 +44,31 @@ User.init({
         allowNull:false,
         validate: {
             isEmail: true,
-            isNull: false,
         }
     },
 },
 {
     sequelize:connection,
     modelName:"User",
+    // timestamps:false,
 }
 );
 
 User.beforeCreate(async(user)=>{
     const salt = await bcrypt.genSalt();
-    user.Salt = salt
-    const passwordHash = await bcrypt.hash(user.Password, salt)
+    user.salt = salt
+    const passwordHash = await bcrypt.hash(user.password, salt)
     
-    user.Password = passwordHash
+    user.password = passwordHash
 })
 
 User.beforeBulkCreate(async(user)=>{
     const salt = await bcrypt.genSalt();
-    user[0].dataValues.Salt = salt
+    user[0].dataValues.salt = salt
 
-    const passwordHash = await bcrypt.hash(user[0].dataValues.Password, salt)
+    const passwordHash = await bcrypt.hash(user[0].dataValues.password, salt)
     
-    user[0].dataValues.Password = passwordHash
+    user[0].dataValues.password = passwordHash
 })
 
 export default User;

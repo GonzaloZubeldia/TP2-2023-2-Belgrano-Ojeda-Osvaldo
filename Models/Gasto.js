@@ -4,37 +4,40 @@ import connection from "../connection/connection.js";
 class Gasto extends Model{}
 
 Gasto.init({
-    name:{
+    id:{
+        type: DT.INTEGER,
+        allowNull:false,
+        autoIncrement:true,
+        primaryKey:true
+    },
+    descripcion:{
         type: DT.STRING,
         allowNull:false,
         validate: {
             len:[1,20],
-            isAlpha: true,
-            isNull: false,
+            isAlphanumeric: true,
         }
     },
     monto:{
         type: DT.INTEGER,
         allowNull:false,
         validate: {
-            len:[1,10],
-            isInt: true,
-            isNull: false,
+            len:[1,20],
+            isNumeric: true,
         }
     },
     fecha:{
         type: DT.DATE,
         allowNull:false,
         validate: {
-            isDate: true,
-            isNull: false,
+            isDate: true, //formato MM-DD-YY
         }
     },
     categoriaID:{
         type: DT.INTEGER,
         allowNull:false,
     },
-    UserID:{
+    userID:{
         type: DT.INTEGER,
         allowNull:false,
     },
@@ -42,6 +45,7 @@ Gasto.init({
 {
     sequelize:connection,
     modelName:"Gasto",
+    timestamps:false,
 }
 );
 

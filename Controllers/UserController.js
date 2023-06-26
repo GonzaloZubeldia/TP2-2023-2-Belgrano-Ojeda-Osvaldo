@@ -1,4 +1,4 @@
-import User from "../Models/User.js";
+import {User, Gasto} from "../Models/index.js";
 
 class UserController {
   constructor() {}
@@ -7,6 +7,10 @@ class UserController {
     try {
       const result = await User.findAll({
         attributes: ["name", "lastName", "password", "email"], //Filtro los campos que me trae la consulta
+        include:[{
+          model:Gasto,
+          attributes:["descripcion","monto"],
+        }]
       });
       if (result.length === 0) throw new Error("No hay usuarios");
       res.status(200).send({
@@ -20,17 +24,21 @@ class UserController {
         message: error.message,
       });
     }
-  };
+  }
 
   getUserById = async (req, res) => {
     try {
       const { id } = req.params;
       const result = await User.findAll({
         attributes: ["name", "lastName", "password", "email"],
-        //Filtro por Id
-        where: {
-          id,
-        },
+        include:[{
+          //Filtro por Id
+          where: {
+            id,
+          },
+            model:Gasto,
+            attributes:["descripcion","monto"],
+        }],
       });
       if (result.length === 0) throw new Error("No hay usuarios");
       res.status(200).send({
@@ -48,8 +56,8 @@ class UserController {
 
   createUser = async (req, res) => {
     try {
-      const { name, lastName, password, email } = req.body;
-      const result = await User.create({ name, lastName, password, email });
+      const {name, lastName, password, email } = req.body;
+      const result = await User.create({name, lastName, password, email });
       if (!result) throw new Error("No se pudo crear el Usuario");
       res.status(200).send({
         success: true,
@@ -66,9 +74,9 @@ class UserController {
   deleteUser = async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, lastName, password, email } = req.body;
+      const {name, lastName, password, email } = req.body;
       const result = await User.drop(
-        { name, lastName, password, email },
+        {name, lastName, password, email },
         {
           where: {
             id,

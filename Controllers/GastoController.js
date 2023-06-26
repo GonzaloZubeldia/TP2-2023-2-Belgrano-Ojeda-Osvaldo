@@ -1,12 +1,17 @@
-import Gasto from "../Models/Gasto.js";
-import User from "../Models/User.js";
+import {Gasto, User, Categoria} from "../Models/index.js";
 
 class GastoController {
   constructor() {}
   getAllGastos = async (req, res) => {
     try {
-      const result = await User.findAll({
-        attributes: ["name", "monto", "fecha", "categoriaID", "userID"], //Filtro los campos que me trae la consulta
+      const result = await Gasto.findAll({
+        attributes: ["descripcion", "monto", "fecha", "categoriaID", "userID"], //Filtro los campos que me trae la consulta
+        include:[{
+          model:Categoria,
+          attributes:["name"],
+          model:User,
+          attributes:["id","name"]
+        }],
       });
       if (result.length === 0) throw new Error("No hay gastos");
       res.status(200).send({
@@ -25,8 +30,14 @@ class GastoController {
   getGastoById = async (req, res) => {
     try {
       const { id } = req.params;
-      const result = await User.findAll({
-        attributes: ["name", "monto", "fecha", "categoriaID", "userID"],
+      const result = await Gasto.findAll({
+        attributes: ["descripcion", "monto", "fecha", "categoriaID", "userID"],
+        include:[{
+          model:Categoria,
+          attributes:["name"],
+          model:User,
+          attributes:["id","name"]
+        }],
         //Filtro por Id
         where: {
           id,
@@ -46,10 +57,10 @@ class GastoController {
     }
   };
 
-  creatGasto = async (req, res) => {
+  createGasto = async (req, res) => {
     try {
-      const { name, lastName, password, email } = req.body;
-      const result = await User.create({ name, monto, fecha, categoriaID, userID });
+      const { descripcion, monto, fecha, categoriaID, userID} = req.body;
+      const result = await Gasto.create({ descripcion, monto, fecha, categoriaID, userID });
       if (!result) throw new Error("No se pudo crear el Usuario");
       res.status(200).send({
         success: true,
@@ -66,9 +77,9 @@ class GastoController {
   deleteGasto = async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, monto, fecha, categoriaID, userID } = req.body;
-      const result = await User.drop(
-        { name, monto, fecha, categoriaID, userID },
+      const { descripcion, monto, fecha, categoriaID, userID } = req.body;
+      const result = await Gasto.drop(
+        { descripcion, monto, fecha, categoriaID, userID },
         {
           where: {
             id,
@@ -91,9 +102,9 @@ class GastoController {
   updateGasto = async (req, res) => {
     try {
       const { id } = req.params;
-      const { name, monto, fecha, categoriaID, userID } = req.body;
-      const result = await User.update(
-        { name, monto, fecha, categoriaID, userID },
+      const { descripcion, monto, fecha, categoriaID, userID } = req.body;
+      const result = await Gasto.update(
+        { descripcion, monto, fecha, categoriaID, userID },
         {
           where: {
             id,

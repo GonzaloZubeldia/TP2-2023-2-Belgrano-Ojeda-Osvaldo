@@ -7,21 +7,22 @@ Categoria.init({
     id:{
         type: DT.INTEGER,
         allowNull:false,
+        primaryKey:true,
+        autoIncrement:true,
     },
     categoria:{
         type: DT.STRING,
         allowNull:false,
-        primaryKey:true,
         validate: {
             len:[1,20],
             isAlpha: true,
-            isNull: false,
         }
     },
 },
 {
     sequelize:connection,
     modelName:"Categoria",
+    // timestamps:false,
 }
 );
 

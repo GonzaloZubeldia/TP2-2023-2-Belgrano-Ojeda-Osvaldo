@@ -1,22 +1,22 @@
-import Categoria from './Categoria.js'
-import Gasto from './Gasto.js'
-import Product from './Product.js' 
-import User from './User.js'
+import Categoria from "./Categoria.js";
+import Gasto from "./Gasto.js";
+import User from "./User.js";
+// import Product from './Product.js'
 
 Categoria.hasMany(Gasto, {
-    foreignKey: "categoriaID",
-  });
+  foreignKey: "categoriaID",
+});
 Gasto.belongsTo(Categoria, {
-    foreignKey: "categoriaID",
-  });
+  foreignKey: "categoriaID",
+});
 User.hasMany(Gasto, {
-    foreignKey: "gastoID",
-  });
-  Gasto.belongsTo(User, {
-    foreignKey: "gastoID",
-  });
+  foreignKey: "gastoID",
+});
+Gasto.belongsTo(User, {
+  foreignKey: "gastoID",
+});
 
-//Role.hasMany(User); 
-//User.belongsTo(Role); 
+//Role.hasMany(User);
+//User.belongsTo(Role);
 
-export {Categoria,Product,User,Gasto}
+export { Categoria, User, Gasto };

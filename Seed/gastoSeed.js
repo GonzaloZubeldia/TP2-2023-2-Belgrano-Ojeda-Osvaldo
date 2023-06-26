@@ -5,32 +5,22 @@ const gastoSeed = async() => {
         await Gasto.bulkCreate([{
             descripcion: "Verduras",
             monto: "2000",
-            categoria: "Comida"
+            categoria: "Comida",
+            fecha:"26-06-2023"
         },
         {
             descripcion:"Traumatólogo",
             monto:"3000",
-            categoria: "Medico"
+            categoria: "Medico",
+            fecha:"26-06-2023"
         },
         {
             descripcion:"Subte",
             monto:"800",
-            categoria: "Transporte"
+            categoria: "Transporte",
+            fecha:"26-06-2023"
         },
-        {
-            Name:"Bateria de auto",
-            Description:"Bateria de auto repuesto",
-            UnitPrice:"45000",
-            Image:"bateria_auto.jpg",
-            CategoryId:3
-        },
-        {
-            Name:"Bicicleta Venzo",
-            Description:"Bicicleta Venzo R29",
-            UnitPrice:"170000",
-            Image:"bicicleta_venzo.jpg",
-            CategoryId:4 
-        }])
+        ])
     } catch (err) {
         console.log(err)
     }

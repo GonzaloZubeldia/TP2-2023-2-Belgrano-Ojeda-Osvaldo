@@ -5,6 +5,7 @@ const app = express();
 import { serverPort } from "./config/config.js";
 import routes from "./routes/routes.js";
 import categoriaSeed from "./Seed/categoriaSeed.js";
+import gastoSeed from "./Seed/gastoSeed.js";
 
 //Middleware
 app.use(express.json());
@@ -23,5 +24,5 @@ await connection.sync({force:false}).then(() =>{
   app.listen(serverPort, () => {
     console.log(`Server OK http://localhost:"${serverPort}"`);
   });
-}).then(()=>categoriaSeed)
+}).then(()=>categoriaSeed).then(()=>gastoSeed)
 

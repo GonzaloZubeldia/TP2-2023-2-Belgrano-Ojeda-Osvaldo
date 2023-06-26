@@ -1,5 +1,4 @@
-import Categoria from "../Models/Categoria.js";
-import User from "../Models/User.js";
+import {Categoria} from "../Models/index.js";
 
 class CategoriaController {
   constructor() {}
@@ -25,7 +24,7 @@ class CategoriaController {
   getCategoriaById = async (req, res) => {
     try {
       const { id } = req.params;
-      const result = await User.findAll({
+      const result = await Categoria.findAll({
         attributes: ["id", "categoria"],
         //Filtro por Id
         where: {
@@ -48,7 +47,7 @@ class CategoriaController {
 
   createCategoria = async (req, res) => {
     try {
-      const { id, categoria } = req.body;
+      const {id, categoria } = req.body;
       const result = await Categoria.create({ id, categoria });
       if (!result) throw new Error("No se pudo crear la categoría");
       res.status(200).send({
