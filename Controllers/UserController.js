@@ -1,4 +1,5 @@
-import {User, Gasto} from "../Models/index.js";
+import { User, Gasto } from "../Models/index.js";
+import { generateToken } from "../Utils/token.js";
 
 class UserController {
   constructor() {}
@@ -7,10 +8,12 @@ class UserController {
     try {
       const result = await User.findAll({
         attributes: ["name", "lastName", "password", "email"], //Filtro los campos que me trae la consulta
-        include:[{
-          model:Gasto,
-          attributes:["descripcion","monto"],
-        }]
+        include: [
+          {
+            model: Gasto,
+            attributes: ["descripcion", "monto"],
+          },
+        ],
       });
       if (result.length === 0) throw new Error("No hay usuarios");
       res.status(200).send({
@@ -24,21 +27,23 @@ class UserController {
         message: error.message,
       });
     }
-  }
+  };
 
   getUserById = async (req, res) => {
     try {
       const { id } = req.params;
       const result = await User.findAll({
         attributes: ["name", "lastName", "password", "email"],
-        include:[{
-          //Filtro por Id
-          where: {
-            id,
+        include: [
+          {
+            //Filtro por Id
+            where: {
+              id,
+            },
+            model: Gasto,
+            attributes: ["descripcion", "monto"],
           },
-            model:Gasto,
-            attributes:["descripcion","monto"],
-        }],
+        ],
       });
       if (result.length === 0) throw new Error("No hay usuarios");
       res.status(200).send({
@@ -54,10 +59,10 @@ class UserController {
     }
   };
 
-  createUser = async (req, res) => {
+  createUser = async (req, res, next) => {
     try {
-      const {name, lastName, password, email } = req.body;
-      const result = await User.create({name, lastName, password, email });
+      const { name, lastName, password, email } = req.body;
+      const result = await User.create({ name, lastName, password, email });
       if (!result) throw new Error("No se pudo crear el Usuario");
       res.status(200).send({
         success: true,
@@ -74,9 +79,9 @@ class UserController {
   deleteUser = async (req, res) => {
     try {
       const { id } = req.params;
-      const {name, lastName, password, email } = req.body;
+      const { name, lastName, password, email } = req.body;
       const result = await User.drop(
-        {name, lastName, password, email },
+        { name, lastName, password, email },
         {
           where: {
             id,
@@ -120,6 +125,62 @@ class UserController {
       });
     }
   };
+
+loginUser = async (req, res, next) => {
+  try {
+    const { email, password: passwordTextoPlano } = req.body;
+    const result = await User.findOne({
+      where: {
+        email,
+      },
+    });
+    if (!result) {
+      const error = new Error("Usuario no encontrado");
+      error.status = 400;
+      throw error;
+    }
+    const comparePassword = await result.validatePassword(passwordTextoPlano);
+    if (!comparePassword) {
+      const error = new Error("Contraseña incorrecta");
+      error.status = 400;
+      throw error;
+    }
+
+    const payload = {
+      id: result.id,
+      email: result.email,
+      role:"admin"
+    };
+
+    const token = generateToken(payload);
+    res.cookie("token", token);
+
+    res.status(200).send({
+      success: true,
+      message: "Logueado con exito",
+    });
+  } catch (error) {
+    next(error);
+  }
+};  
+
+me = (req, res, next) => {
+  const {user}=req
+
+   res.status(200).send({
+     success: true,
+     message: "Usuario ok",
+     result:user
+   });
+ };
+
+ logoutUser =(req, res, next)=>{
+   res.cookie("token", "");
+   res.status(200).send({
+     success: true,
+     message: "Usuario deslogueado",
+   });
+ }
 }
 
 export default UserController;

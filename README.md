@@ -16,5 +16,14 @@ npm install sequelize --save mysql2
 //Instalamos las variables de entorno  
 npm install dotenv  
 
-//DOCUMENTACION IMPORTANTE DE SEQUELIZE (VALIDAciones, get, create, post, delete, etc)
+//DOCUMENTACION IMPORTANTE DE SEQUELIZE (Validaciones, get, create, post, delete, etc)
  https://sequelize.org/docs/v6/category/core-concepts/
+
+ // Instalamos bcrypt (encriptacion de contraseña)
+npm install bcrypt
+
+//Instalamos JsonWebToken (generacion de token)
+npm install jsonwebtoken
+
+//Instalamos libreria cookie-parser
+npm install cookie-parser

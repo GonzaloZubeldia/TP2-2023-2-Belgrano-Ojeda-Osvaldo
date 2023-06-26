@@ -13,6 +13,7 @@ Categoria.init({
     categoria:{
         type: DT.STRING,
         allowNull:false,
+        unique:true,
         validate: {
             len:[1,20],
             isAlpha: true,

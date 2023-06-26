@@ -1,24 +1,22 @@
 import express from "express";
 import connection from "./connection/connection.js";
-
 const app = express();
 import { serverPort } from "./config/config.js";
 import routes from "./routes/routes.js";
 import categoriaSeed from "./Seed/categoriaSeed.js";
 import gastoSeed from "./Seed/gastoSeed.js";
+import cookieParser from "cookie-parser";
 
 //Middleware
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
-
 app.use(routes)
 
-//Momentaneamente
-// import User from "./Models/User.js";
-// import Product from "./Models/Product.js";
-// import Categoria from "./Models/Categoria.js";
-// import Gasto from "./Models/Gasto.js";
+app.use((error, req, res, next) => {
+  res.status(error.status || 500).send({ success: false, message: error.message });
+});
 
 await connection.sync({force:false}).then(() =>{
   app.listen(serverPort, () => {
