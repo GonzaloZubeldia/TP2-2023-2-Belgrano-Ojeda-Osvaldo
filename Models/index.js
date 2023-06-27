@@ -10,10 +10,10 @@ Gasto.belongsTo(Categoria, {
   foreignKey: "categoriaID",
 });
 User.hasMany(Gasto, {
-  foreignKey: "gastoID",
+  foreignKey: "userID",
 });
 Gasto.belongsTo(User, {
-  foreignKey: "gastoID",
+  foreignKey: "userID",
 });
 
 //Role.hasMany(User);

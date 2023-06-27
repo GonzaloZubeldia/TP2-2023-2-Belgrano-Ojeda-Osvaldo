@@ -78,7 +78,7 @@ class GastoController {
     try {
       const { id } = req.params;
       const { descripcion, monto, fecha, categoriaID, userID } = req.body;
-      const result = await Gasto.drop(
+      const result = await Gasto.findOne(
         { descripcion, monto, fecha, categoriaID, userID },
         {
           where: {
@@ -87,6 +87,7 @@ class GastoController {
         }
       );
       if (result[0] === 0) throw new Error("No se pudo eliminar el gasto");
+      result.destroy()
       res.status(200).send({
         success: true,
         message: "Se elimino con exito",
